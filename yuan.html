@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<style>
+/* 	.da{
+		width: 1000px;
+		height: 1000px;
+		background: blue;
+	} */
+	.pointer{
+		width: 1px;
+		height: 1px;
+		position: absolute;
+		left: 50%;
+		top: 50%;
+	}
+	.dian{
+		width: 20px;
+		height: 20px;
+		background: yellow;
+		border-radius: 50%;
+		position: absolute;
+		top: 0;
+		left: 0;
+		transition: all ease 0.5s;
+	}
+
+</style>
+<body>
+	<div class="da">
+		<div class="pointer"></div>
+	</div>
+</body>
+<script>
+	// lefts = r * Math.cos(deg) 
+	// tops = r * Math.sin(deg) 
+	// deg = 360/num
+ // 	i i*deg 角度转弧度
+	// 30  x
+	// 180 Math.PI
+	// 30 *(Math.PI/180)
+	let t = document.querySelector('.pointer');
+	// let t1 = document.querySelector('.da');
+	yuan(200,90);
+	function yuan(r,num){		
+		// let r = 300;
+		// let num = 20;
+		let deg = 360/30;
+		for(let i=0;i<num;i++){
+			if(i%30==0){
+				r+=30;
+			}
+
+			let divs = document.createElement('div');
+			divs.className = 'dian';
+			let rad  =deg*i*Math.PI/180;
+			let lefts = r*Math.cos(rad);
+			let tops = r*Math.sin(rad);	
+			divs.style.background = color();		
+			t.appendChild(divs);
+			setTimeout(function(){
+				divs.style.transitionDelay = `${100*i}ms`;
+				divs.style.left = lefts+'px';
+				divs.style.top = tops+'px';
+			},10);
+		}
+
+		function color(){
+			let str = 'rgb(' ;
+			for(let j=1;j<=3;j++){
+				let rgb= Math.round(Math.random()*255);
+				// num = num.join();
+				str += rgb+',';				
+			}
+				str = str.slice(0,-1);
+			str += ')';
+			return str;			
+		}
+		// let ti = setInterval(function(){
+		// 	yuan(200,90);
+		// },2000)	
+
+
+	}
+</script>
+</html>
